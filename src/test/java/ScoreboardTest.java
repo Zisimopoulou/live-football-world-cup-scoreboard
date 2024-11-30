@@ -85,4 +85,11 @@ public class ScoreboardTest {
         });
     }
 
+    @Test
+    public void finishMatch_GivenMatches_ShouldRemoveMatch() {
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.finishMatch("Mexico", "Canada");
+
+        assertTrue(scoreboard.getSortedMatchesInProgress().isEmpty(), "Match should be removed");
+    }
 }
