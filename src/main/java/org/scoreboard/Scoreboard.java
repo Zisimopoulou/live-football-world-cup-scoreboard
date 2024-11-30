@@ -12,7 +12,7 @@ public class Scoreboard {
     }
 
     public void startMatch(String homeTeam, String awayTeam) {
-        if (isTeamNotInAnyMatch(homeTeam) && isTeamNotInAnyMatch(awayTeam))) {
+        if (isTeamNotInAnyMatch(homeTeam) && isTeamNotInAnyMatch(awayTeam)) {
             Match newMatch = new Match(homeTeam, awayTeam);
             matches.add(newMatch);
         }
