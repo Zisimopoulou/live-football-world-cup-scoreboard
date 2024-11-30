@@ -118,4 +118,29 @@ public class ScoreboardTest {
         assertEquals("Argentina 3 - 1 Australia", matches.get(2).toString(), "Argentina 3 - 1 Australia should be listed last");
     }
 
+    @Test
+    void getMatchesInProgress_GivenIdenticalScores_ShouldSortByTotalScoreThenByStartTime() {
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.updateScore("Mexico", "Canada", 0, 5);
+
+        scoreboard.startMatch("Spain", "Brazil");
+        scoreboard.updateScore("Spain", "Brazil", 10, 2);
+
+        scoreboard.startMatch("Germany", "France");
+        scoreboard.updateScore("Germany", "France", 2, 2);
+
+        scoreboard.startMatch("Uruguay", "Italy");
+        scoreboard.updateScore("Uruguay", "Italy", 6, 6);
+
+        scoreboard.startMatch("Argentina", "Australia");
+        scoreboard.updateScore("Argentina", "Australia", 3, 1);
+
+        List<Match> matches = scoreboard.getSortedMatchesInProgress();
+        assertEquals("Uruguay 6 - 6 Italy", matches.get(0).toString(), "Uruguay 6 - 6 Italy should be listed first");
+        assertEquals("Spain 10 - 2 Brazil", matches.get(1).toString(), "Spain 10 - 2 Brazil should be listed second");
+        assertEquals("Mexico 0 - 5 Canada", matches.get(2).toString(), "Mexico 0 - 5 Canada should be listed third");
+        assertEquals("Argentina 3 - 1 Australia", matches.get(3).toString(), "Argentina 3 - 1 Australia should be listed fourth");
+        assertEquals("Germany 2 - 2 France", matches.get(4).toString(), "Germany 2 - 2 France should be listed last");
+    }
+
 }
