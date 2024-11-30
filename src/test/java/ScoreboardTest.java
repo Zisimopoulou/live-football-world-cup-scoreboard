@@ -52,4 +52,12 @@ public class ScoreboardTest {
         scoreboard.startMatch("Mexico", null);
         assertEquals(0, scoreboard.getSortedMatchesInProgress().size(), "Team name cannot be null");
     }
+
+    @Test
+    void testSameTeamForHomeAndAway() {
+        scoreboard.startMatch("Mexico", "Mexico");
+
+        assertEquals(0, scoreboard.getSortedMatchesInProgress().size(), "Match should not start with the same team for home and away");
+    }
+
 }
