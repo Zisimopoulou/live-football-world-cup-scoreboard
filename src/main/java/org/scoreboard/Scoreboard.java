@@ -23,9 +23,10 @@ public class Scoreboard {
 
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
         Match match = matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
-        if (Objects.nonNull(match)) {
-            match.updateScore(homeScore, awayScore);
+        if (Objects.isNull(match)) {
+            throw new MatchNotFoundException("Match not found between " + homeTeam + " and " + awayTeam);
         }
+        match.updateScore(homeScore, awayScore);
     }
 
     public List<Match> getSortedMatchesInProgress() {

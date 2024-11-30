@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.scoreboard.Match;
+import org.scoreboard.MatchNotFoundException;
 import org.scoreboard.Scoreboard;
 
 import java.util.List;
