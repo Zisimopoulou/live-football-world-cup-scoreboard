@@ -43,4 +43,13 @@ public class ScoreboardTest {
         Match match = matches.get(0);
         assertEquals("Mexico", match.getHomeTeam(), "A team should not be in more than one match");
     }
+
+    @Test
+    void testEmptyTeamNames() {
+        scoreboard.startMatch("", "Canada");
+        assertEquals(0, scoreboard.getSortedMatchesInProgress().size(), "Team name cannot be empty");
+
+        scoreboard.startMatch("Mexico", null);
+        assertEquals(0, scoreboard.getSortedMatchesInProgress().size(), "Team name cannot be null");
+    }
 }
