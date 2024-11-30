@@ -27,17 +27,11 @@ public class Scoreboard {
         }
 
         Match match = findMatch(homeTeam, awayTeam);
-        if (Objects.isNull(match)) {
-            throw new MatchNotFoundException("Match not found between " + homeTeam + " and " + awayTeam);
-        }
         match.updateScore(homeScore, awayScore);
     }
 
     public void finishMatch(String homeTeam, String awayTeam) {
         Match match = findMatch(homeTeam, awayTeam);
-        if (Objects.isNull(match)) {
-            throw new MatchNotFoundException("Match not found between " + homeTeam + " and " + awayTeam);
-        }
         matches.remove(match);
     }
 
@@ -46,7 +40,11 @@ public class Scoreboard {
     }
 
     private Match findMatch(String homeTeam, String awayTeam) throws MatchNotFoundException {
-        return matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
+        Match match = matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
+        if (Objects.isNull(match)) {
+            throw new MatchNotFoundException("Match not found between " + homeTeam + " and " + awayTeam);
+        }
+        return match;
     }
 
     private boolean isTeamNotInAnyMatch(String team) {
