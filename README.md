@@ -1,7 +1,7 @@
 **Live Football World Cup Scoreboard**
 
 **Overview**
-This project implements a Live Football World Cup Scoreboard, which allows you to manage and track ongoing football matches. The scoreboard supports operations to start new matches, update scores, finish matches, and retrieve a summary of all active matches ordered by their total score. Matches with identical scores are sorted by their start time.
+ This project implements a Live Football World Cup Scoreboard, which allows you to manage and track ongoing football matches. The scoreboard supports operations to start new matches, update scores, finish matches, and retrieve a summary of all active matches ordered by their total score. Matches with identical scores are sorted by their start time.
 
 **Features**
 - Start a new match with an initial score of 0-0.
