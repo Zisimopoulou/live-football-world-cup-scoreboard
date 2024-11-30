@@ -92,4 +92,11 @@ public class ScoreboardTest {
 
         assertTrue(scoreboard.getSortedMatchesInProgress().isEmpty(), "Match should be removed");
     }
+
+    @Test
+    public void finishMatch_MatchDoesNotExist_throwsException() {
+        assertThrows(MatchNotFoundException.class, () -> {
+            scoreboard.finishMatch("Mexico", "Canada");
+        });
+    }
 }
