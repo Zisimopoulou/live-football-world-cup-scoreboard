@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.scoreboard.Match;
 import org.scoreboard.Scoreboard;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,5 +31,16 @@ public class ScoreboardTest {
         assertEquals("Canada", match.getAwayTeam(), "Home team should be Canada");
         assertEquals(0, match.getHomeScore(), "Initial home score should be 0");
         assertEquals(0, match.getAwayScore(), "Initial away score should be 0");
+    }
+
+    @Test
+    void testSameTeamInMultipleMatches() {
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.startMatch("Greece", "Mexico");
+
+        List<Match> matches = scoreboard.getSortedMatchesInProgress();
+        assertEquals(1, matches.size());
+        Match match = matches.get(0);
+        assertEquals("Mexico", match.getHomeTeam(), "A team should not be in more than one match");
     }
 }
