@@ -26,7 +26,7 @@ public class Scoreboard {
             throw new IllegalArgumentException("Scores must be positive integers");
         }
 
-        Match match = matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
+        Match match = findMatch(homeTeam, awayTeam);
         if (Objects.isNull(match)) {
             throw new MatchNotFoundException("Match not found between " + homeTeam + " and " + awayTeam);
         }
@@ -34,7 +34,7 @@ public class Scoreboard {
     }
 
     public void finishMatch(String homeTeam, String awayTeam) {
-        Match match = matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
+        Match match = findMatch(homeTeam, awayTeam);
         if (Objects.nonNull(match)) {
             matches.remove(match);
         }
@@ -42,6 +42,10 @@ public class Scoreboard {
 
     public List<Match> getSortedMatchesInProgress() {
         return new ArrayList<>(matches);
+    }
+
+    private Match findMatch(String homeTeam, String awayTeam) throws MatchNotFoundException {
+        return matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
     }
 
     private boolean isTeamNotInAnyMatch(String team) {
