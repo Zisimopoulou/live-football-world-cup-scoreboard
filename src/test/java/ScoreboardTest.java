@@ -5,8 +5,7 @@ import org.scoreboard.Scoreboard;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreboardTest {
 
@@ -68,6 +67,13 @@ public class ScoreboardTest {
         Match match = scoreboard.getSortedMatchesInProgress().get(0);
         assertEquals(2, match.getHomeScore(), "Home score should be 2");
         assertEquals(3, match.getAwayScore(), "Away score should be 3");
+    }
+
+    @Test
+    void updateScore_MatchDoesNotExist_throwsException() {
+        assertThrows(MatchNotFoundException.class, () -> {
+            scoreboard.updateScore("Mexico", "Canada", 2, 3);
+        });
     }
 
 }
