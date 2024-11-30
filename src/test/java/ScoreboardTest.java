@@ -60,4 +60,14 @@ public class ScoreboardTest {
         assertEquals(0, scoreboard.getSortedMatchesInProgress().size(), "Match should not start with the same team for home and away");
     }
 
+    @Test
+    public void testUpdateScore() {
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.updateScore("Mexico", "Canada", 2, 3);
+
+        Match match = scoreboard.getSortedMatchesInProgress().get(0);
+        assertEquals(2, match.getHomeScore(), "Home score should be 2");
+        assertEquals(3, match.getAwayScore(), "Away score should be 3");
+    }
+
 }
