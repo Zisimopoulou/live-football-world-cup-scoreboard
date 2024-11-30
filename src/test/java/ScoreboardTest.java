@@ -77,4 +77,12 @@ public class ScoreboardTest {
         });
     }
 
+    @Test
+    void updateScore_GivenNegativeScores_throwsException() {
+        scoreboard.startMatch("Mexico", "Canada");
+        assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.updateScore("Mexico", "Canada", -1, 3);
+        });
+    }
+
 }
