@@ -35,9 +35,10 @@ public class Scoreboard {
 
     public void finishMatch(String homeTeam, String awayTeam) {
         Match match = findMatch(homeTeam, awayTeam);
-        if (Objects.nonNull(match)) {
-            matches.remove(match);
+        if (Objects.isNull(match)) {
+            throw new MatchNotFoundException("Match not found between " + homeTeam + " and " + awayTeam);
         }
+        matches.remove(match);
     }
 
     public List<Match> getSortedMatchesInProgress() {
