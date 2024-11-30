@@ -33,6 +33,13 @@ public class Scoreboard {
         match.updateScore(homeScore, awayScore);
     }
 
+    public void finishMatch(String homeTeam, String awayTeam) {
+        Match match = matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
+        if (Objects.nonNull(match)) {
+            matches.remove(match);
+        }
+    }
+
     public List<Match> getSortedMatchesInProgress() {
         return new ArrayList<>(matches);
     }
