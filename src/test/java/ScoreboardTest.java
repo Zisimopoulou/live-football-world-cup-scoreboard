@@ -18,12 +18,12 @@ public class ScoreboardTest {
     }
 
     @Test
-    void testScoreboardInitialization() {
+    void getMatches_GivenNoMatchesInProgress_ShouldBeEmpty() {
         assertTrue(scoreboard.getSortedMatchesInProgress().isEmpty(), "Scoreboard should start empty");
     }
 
     @Test
-    void testStartMatch() {
+    void startMatch_GivenTeams_ShouldInitializeScoresToZero() {
         scoreboard.startMatch("Mexico", "Canada");
 
         Match match = scoreboard.getSortedMatchesInProgress().get(0);
@@ -34,7 +34,7 @@ public class ScoreboardTest {
     }
 
     @Test
-    void testSameTeamInMultipleMatches() {
+    void startMatch_GivenTeamAlreadyInProgress_ShouldNotAllowSameTeamInMultipleMatches() {
         scoreboard.startMatch("Mexico", "Canada");
         scoreboard.startMatch("Greece", "Mexico");
 
@@ -45,7 +45,7 @@ public class ScoreboardTest {
     }
 
     @Test
-    void testEmptyTeamNames() {
+    void startMatch_GivenEmptyOrNullTeamNames_MatchShouldNotStart() {
         scoreboard.startMatch("", "Canada");
         assertEquals(0, scoreboard.getSortedMatchesInProgress().size(), "Team name cannot be empty");
 
@@ -54,14 +54,14 @@ public class ScoreboardTest {
     }
 
     @Test
-    void testSameTeamForHomeAndAway() {
+    void startMatch_GivenSameTeamForHomeAndAway_MatchShouldNotStart() {
         scoreboard.startMatch("Mexico", "Mexico");
 
         assertEquals(0, scoreboard.getSortedMatchesInProgress().size(), "Match should not start with the same team for home and away");
     }
 
     @Test
-    public void testUpdateScore() {
+    public void updateScore_GivenScores_ShouldUpdateCorrectly() {
         scoreboard.startMatch("Mexico", "Canada");
         scoreboard.updateScore("Mexico", "Canada", 2, 3);
 
