@@ -22,6 +22,10 @@ public class Scoreboard {
     }
 
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        if (homeScore < 0 || awayScore < 0) {
+            throw new IllegalArgumentException("Scores must be positive integers");
+        }
+
         Match match = matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
         if (Objects.isNull(match)) {
             throw new MatchNotFoundException("Match not found between " + homeTeam + " and " + awayTeam);
