@@ -12,11 +12,17 @@ public class Scoreboard {
     }
 
     public void startMatch(String homeTeam, String awayTeam) {
-        Match newMatch = new Match(homeTeam, awayTeam);
-        matches.add(newMatch);
+        if (isTeamNotInAnyMatch(homeTeam) && isTeamNotInAnyMatch(awayTeam))) {
+            Match newMatch = new Match(homeTeam, awayTeam);
+            matches.add(newMatch);
+        }
     }
 
     public List<Match> getSortedMatchesInProgress() {
         return new ArrayList<>(matches);
+    }
+
+    private boolean isTeamNotInAnyMatch(String team) {
+        return matches.stream().noneMatch(match -> match.getHomeTeam().equals(team) || match.getAwayTeam().equals(team));
     }
 }
