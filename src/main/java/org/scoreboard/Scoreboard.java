@@ -1,5 +1,7 @@
 package org.scoreboard;
 
+import org.junit.platform.commons.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class Scoreboard {
     }
 
     public void startMatch(String homeTeam, String awayTeam) {
-        if (isTeamNotInAnyMatch(homeTeam) && isTeamNotInAnyMatch(awayTeam)) {
+        if (StringUtils.isNotBlank(homeTeam) && StringUtils.isNotBlank(awayTeam) && isTeamNotInAnyMatch(homeTeam) && isTeamNotInAnyMatch(awayTeam)) {
             Match newMatch = new Match(homeTeam, awayTeam);
             matches.add(newMatch);
         }
