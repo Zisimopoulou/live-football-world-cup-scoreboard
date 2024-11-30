@@ -13,6 +13,11 @@ public class Match {
         this.awayScore = 0;
     }
 
+    public void updateScore(int homeScore, int awayScore) {
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
+    }
+
     public String getHomeTeam() {
         return homeTeam;
     }
