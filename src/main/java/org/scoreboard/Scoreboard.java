@@ -36,8 +36,14 @@ public class Scoreboard {
     }
 
     public List<Match> getSortedMatchesInProgress() {
-        return new ArrayList<>(matches);
+        List<Match> sortedMatches = new ArrayList<>(matches);
+        sortedMatches.sort((m1, m2) -> Integer.compare(
+                m2.getHomeScore() + m2.getAwayScore(),
+                m1.getHomeScore() + m1.getAwayScore()
+        ));
+        return sortedMatches;
     }
+
 
     private Match findMatch(String homeTeam, String awayTeam) throws MatchNotFoundException {
         Match match = matches.stream().filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)).findFirst().orElse(null);
