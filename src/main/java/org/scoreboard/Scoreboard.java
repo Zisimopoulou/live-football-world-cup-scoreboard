@@ -21,7 +21,7 @@ public class Scoreboard {
         }
     }
 
-    public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+    public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) throws MatchNotFoundException {
         if (homeScore < 0 || awayScore < 0) {
             throw new IllegalArgumentException("Scores must be positive integers");
         }
@@ -30,7 +30,7 @@ public class Scoreboard {
         match.updateScore(homeScore, awayScore);
     }
 
-    public void finishMatch(String homeTeam, String awayTeam) {
+    public void finishMatch(String homeTeam, String awayTeam) throws MatchNotFoundException {
         Match match = findMatch(homeTeam, awayTeam);
         matches.remove(match);
     }
