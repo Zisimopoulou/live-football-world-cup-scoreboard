@@ -4,6 +4,7 @@ import org.junit.platform.commons.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Scoreboard {
 
@@ -14,7 +15,7 @@ public class Scoreboard {
     }
 
     public void startMatch(String homeTeam, String awayTeam) {
-        if (StringUtils.isNotBlank(homeTeam) && StringUtils.isNotBlank(awayTeam) && isTeamNotInAnyMatch(homeTeam) && isTeamNotInAnyMatch(awayTeam)) {
+        if (StringUtils.isNotBlank(homeTeam) && StringUtils.isNotBlank(awayTeam) && !Objects.equals(homeTeam, awayTeam) && isTeamNotInAnyMatch(homeTeam) && isTeamNotInAnyMatch(awayTeam)) {
             Match newMatch = new Match(homeTeam, awayTeam);
             matches.add(newMatch);
         }
