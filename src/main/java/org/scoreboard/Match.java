@@ -1,16 +1,25 @@
 package org.scoreboard;
 
+import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Match {
+    private static final AtomicInteger sequence = new AtomicInteger(0);
     private String homeTeam;
     private String awayTeam;
     private int homeScore;
     private int awayScore;
+    private LocalDateTime startTime;
+    private final int sequenceNumber;
+
 
     public Match(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;
         this.awayScore = 0;
+        this.startTime = LocalDateTime.now();
+        this.sequenceNumber = sequence.incrementAndGet();
     }
 
     public void updateScore(int homeScore, int awayScore) {
@@ -48,6 +57,18 @@ public class Match {
 
     public void setAwayScore(int awayScore) {
         this.awayScore = awayScore;
+    }
+
+    public int getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
     @Override

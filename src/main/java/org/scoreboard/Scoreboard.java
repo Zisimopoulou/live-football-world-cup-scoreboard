@@ -37,10 +37,24 @@ public class Scoreboard {
 
     public List<Match> getSortedMatchesInProgress() {
         List<Match> sortedMatches = new ArrayList<>(matches);
-        sortedMatches.sort((m1, m2) -> Integer.compare(
-                m2.getHomeScore() + m2.getAwayScore(),
-                m1.getHomeScore() + m1.getAwayScore()
-        ));
+        sortedMatches.sort((m1, m2) -> {
+            int scoreComparison = Integer.compare(
+                    m2.getHomeScore() + m2.getAwayScore(),
+                    m1.getHomeScore() + m1.getAwayScore()
+            );
+
+            if (scoreComparison != 0) {
+                return scoreComparison;
+            }
+
+            int timeComparison = m2.getStartTime().compareTo(m1.getStartTime());
+
+            if (timeComparison == 0) {
+                return Integer.compare(m2.getSequenceNumber(), m1.getSequenceNumber());
+            }
+
+            return timeComparison;
+        });
         return sortedMatches;
     }
 
